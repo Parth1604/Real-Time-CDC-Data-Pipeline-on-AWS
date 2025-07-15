@@ -53,3 +53,47 @@ UPDATE /CustomerOrders {
   "status": "cancelled"
 }
 
+```
+---
+
+## 💡 What I Learned
+
+- Gained hands-on experience with **real-world event-driven pipeline design**
+- Understood how **Change Data Capture (CDC)** works using **DynamoDB Streams**
+- Learned to **tune Kinesis Firehose buffering** to balance **latency vs cost**
+- Designed for **resiliency**, incorporating **failure handling and retry logic** across components
+
+
+---
+
+## 🔮 Future Enhancements: Apache Hudi Integration
+
+To evolve this real-time ingestion pipeline into a full **lakehouse architecture**, the next enhancement will be the integration of **Apache Hudi** using AWS Glue.
+
+This will allow us to manage the data lifecycle more effectively — supporting upserts, deletes, incremental queries, and schema evolution — while keeping S3 query-optimized and analytics-ready.
+
+### ✅ Planned Enhancements:
+
+- [ ] Build an **AWS Glue PySpark job** to read raw JSON data from S3
+- [ ] Write cleaned and deduplicated data into **Apache Hudi tables** on S3 (Copy-On-Write)
+- [ ] Use `order_id` as the **primary key** for upserts
+- [ ] Enable **partitioning** (e.g., by `order_date` or `status`) to boost Athena performance
+- [ ] Register the Hudi table in the **Glue Data Catalog**
+- [ ] Allow Athena & QuickSight to query **real-time snapshots** of the order data
+- [ ] Implement **schema evolution** to support changes in order structure
+- [ ] Leverage **Hudi commit metadata** for **incremental ETL** and CDC-based processing
+- [ ] Add logic to handle **deletes** from DynamoDB Streams properly
+- [ ] (Optional) Orchestrate the pipeline with **AWS Step Functions** or **EventBridge Triggers**
+
+### 📊 Benefits of Adding Hudi:
+
+| Feature            | Benefit                                                   |
+|--------------------|------------------------------------------------------------|
+| ✅ Upserts & Deletes | Keeps S3 data lake in sync with latest DynamoDB state     |
+| 🧠 Time Travel       | Query historical snapshots of the data                    |
+| ⚙️ Incremental Pulls | Efficient downstream Glue/Athena jobs using Hudi commits  |
+| 🏗️ Lakehouse Format  | Brings warehouse-like capabilities to your S3 bucket      |
+| 🔄 Schema Evolution  | Supports flexible data changes without breaking pipelines |
+
+---
+
