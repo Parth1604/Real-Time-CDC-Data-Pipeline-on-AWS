@@ -1,7 +1,7 @@
 # Real-Time-CDC-Data-Pipeline-on-AWS
 
 
-![architecture-diagram](architecture-diagram.png)
+![architecture-diagram](Real -Time CDC pipeline.png)
 
 ---
 
